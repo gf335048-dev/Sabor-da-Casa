@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabor da Casa — Aripuanã, MT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2E7CE;
+    --paper-dark: #E6D6AE;
+    --cream: #FBF5E6;
+    --ink: #34241A;
+    --ink-soft: #5A4634;
+    --brick: #A8402C;
+    --brick-dark: #7C2D1D;
+    --green: #4C6B39;
+    --gold: #D9A441;
+    --line: rgba(52,36,26,0.16);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:700; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(242,231,206,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{font-family:'Fraunces', serif; font-weight:700; font-size:1.15rem; text-decoration:none; display:flex; align-items:center; gap:8px;}
+  .brand-dot{width:8px; height:8px; border-radius:50%; background:var(--brick); display:inline-block;}
+  .nav-links{display:flex; gap:26px; list-style:none;}
+  .nav-links a{font-size:0.92rem; text-decoration:none; color:var(--ink-soft); font-weight:500; transition:color .2s;}
+  .nav-links a:hover{color:var(--brick);}
+  .nav-cta{
+    background:var(--green); color:var(--cream); text-decoration:none;
+    padding:9px 18px; border-radius:3px; font-weight:600; font-size:0.88rem;
+    display:flex; align-items:center; gap:6px;
+  }
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    padding:76px 0 110px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(168,64,44,0.07), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(76,107,57,0.08), transparent 45%),
+      var(--paper);
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-1px; height:34px;
+    background:var(--paper);
+    clip-path: polygon(0% 100%, 2% 40%, 5% 90%, 8% 30%, 11% 80%, 14% 20%, 17% 70%, 20% 15%, 23% 85%, 26% 35%, 29% 75%, 32% 10%, 35% 60%, 38% 25%, 41% 90%, 44% 40%, 47% 70%, 50% 15%, 53% 80%, 56% 30%, 59% 85%, 62% 20%, 65% 65%, 68% 10%, 71% 75%, 74% 35%, 77% 90%, 80% 25%, 83% 70%, 86% 15%, 89% 80%, 92% 30%, 95% 85%, 98% 20%, 100% 100%);
+    filter: drop-shadow(0 -3px 2px rgba(52,36,26,0.06));
+  }
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center; position:relative;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:0.76rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--brick); font-weight:700; margin-bottom:18px;
+  }
+  .eyebrow::before{content:"—"; color:var(--gold);}
+  .hero h1{font-size:clamp(2.6rem, 6vw, 4.4rem); line-height:0.98; color:var(--ink); margin-bottom:20px;}
+  .hero h1 em{font-style:italic; color:var(--brick); font-weight:600;}
+  .hero p.lede{font-size:1.12rem; color:var(--ink-soft); max-width:44ch; margin-bottom:32px;}
+
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px;}
+  .btn{
+    text-decoration:none; font-weight:600; font-size:0.95rem;
+    padding:14px 24px; border-radius:3px; display:inline-flex; align-items:center; gap:10px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--brick); color:var(--cream); box-shadow:0 4px 0 var(--brick-dark);}
+  .btn-primary:hover{box-shadow:0 6px 0 var(--brick-dark);}
+  .btn-secondary{background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+  .btn-secondary:hover{background:var(--ink); color:var(--cream);}
+
+  .status-row{display:flex; align-items:center; gap:10px; font-size:0.9rem; color:var(--ink-soft);}
+  .status-dot{width:9px; height:9px; border-radius:50%; background:#8B8B8B;}
+  .status-dot.open{background:var(--green); box-shadow:0 0 0 4px rgba(76,107,57,0.18);}
+
+  /* stamp */
+  .stamp{
+    position:relative; width:190px; height:190px; margin:0 auto;
+    border:2.5px dashed var(--brick); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    transform:rotate(-9deg); color:var(--brick);
+    font-family:'Fraunces', serif;
+  }
+  .stamp-inner{padding:14px;}
+  .stamp .rating{font-size:2.6rem; font-weight:900; line-height:1;}
+  .stamp .stars{color:var(--gold); font-size:1rem; letter-spacing:2px; margin:4px 0;}
+  .stamp .count{font-family:'JetBrains Mono', monospace; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);}
+
+  .hero-visual{display:flex; flex-direction:column; align-items:center; gap:28px;}
+
+  /* marmitex box illustration (signature element) */
+  .marmitex{ position:relative; width:230px; height:170px; margin:10px auto 0; }
+  .marmitex .lid{
+    position:absolute; top:0; left:6px; right:6px; height:34px;
+    background:var(--gold); border-radius:6px 6px 2px 2px;
+    box-shadow:0 3px 0 rgba(52,36,26,0.15);
+  }
+  .marmitex .body{
+    position:absolute; top:26px; left:0; right:0; bottom:0;
+    background:linear-gradient(180deg, #E9C878, #D9A441);
+    border-radius:4px 4px 10px 10px;
+    box-shadow:0 10px 0 rgba(52,36,26,0.08), 0 14px 26px rgba(52,36,26,0.18);
+  }
+  .marmitex .divider{
+    position:absolute; top:26px; bottom:16px; left:50%; width:3px; background:rgba(52,36,26,0.15);
+  }
+  .marmitex .divider.v2{ left:auto; right:38%; top:52%; width:auto; height:3px; left:16px; right:52%; }
+  .steam{
+    position:absolute; top:-38px; width:6px; height:34px; border-radius:6px;
+    background:linear-gradient(180deg, rgba(90,70,52,0), rgba(90,70,52,0.35));
+    animation:rise 3.2s ease-in-out infinite;
+  }
+  .steam.s1{left:70px; animation-delay:0s;}
+  .steam.s2{left:110px; animation-delay:0.9s;}
+  .steam.s3{left:150px; animation-delay:1.7s;}
+  @keyframes rise{
+    0%{ transform:translateY(0) scaleY(0.7); opacity:0; }
+    35%{ opacity:0.8; }
+    100%{ transform:translateY(-26px) scaleY(1.15); opacity:0; }
+  }
+
+  /* ---------- SECTION SCAFFOLDING ---------- */
+  section{padding:88px 0;}
+  .section-head{margin-bottom:44px; max-width:52ch;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem); color:var(--ink);}
+  .section-head p{color:var(--ink-soft); margin-top:12px; font-size:1.02rem;}
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- SOBRE ---------- */
+  #sobre{background:var(--paper-dark);}
+  .sobre-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  @media (max-width:820px){ .sobre-grid{grid-template-columns:1fr; gap:36px;} }
+  .sobre-grid p{color:var(--ink-soft); margin-bottom:16px; font-size:1.02rem;}
+  .sobre-grid p:last-child{margin-bottom:0;}
+  .sobre-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:6px; padding:34px;
+    box-shadow:0 2px 0 var(--line);
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .tag{
+    font-family:'JetBrains Mono', monospace; font-size:0.76rem; letter-spacing:0.04em;
+    background:var(--paper); border:1px solid var(--line); color:var(--ink-soft);
+    padding:7px 12px; border-radius:20px;
+  }
+
+  /* ---------- HORARIOS (order-ticket style) ---------- */
+  #horarios{background:var(--paper);}
+  .ticket{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:4px;
+    max-width:560px;
+    padding:0;
+    box-shadow:0 8px 24px rgba(52,36,26,0.10);
+    position:relative;
+  }
+  .ticket-head{
+    padding:22px 28px;
+    border-bottom:1.5px dashed var(--line);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .ticket-head .mono{font-size:0.78rem; color:var(--ink-soft); letter-spacing:0.05em; text-transform:uppercase;}
+  .ticket-status{
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; font-weight:700;
+    padding:5px 12px; border-radius:20px; background:rgba(76,107,57,0.14); color:var(--green);
+  }
+  .ticket-status.closed{background:rgba(168,64,44,0.12); color:var(--brick);}
+  .ticket-body{padding:26px 28px 30px;}
+  .shift-row{display:flex; justify-content:space-between; align-items:baseline; padding:13px 0; border-bottom:1px solid var(--line);}
+  .shift-row:last-child{border-bottom:none;}
+  .shift-name{font-weight:600; font-size:1rem;}
+  .shift-time{font-family:'JetBrains Mono', monospace; font-size:0.98rem; color:var(--brick); font-weight:600;}
+  .ticket-foot{
+    padding:16px 28px; border-top:1.5px dashed var(--line);
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--ink-soft);
+    display:flex; justify-content:space-between;
+  }
+  .ticket::before, .ticket::after{
+    content:""; position:absolute; width:20px; height:20px; background:var(--paper); border-radius:50%; top:-10px;
+  }
+  .ticket::before{ left:-10px; } .ticket::after{ right:-10px; }
+
+  /* ---------- MARMITEX / DESTAQUE ---------- */
+  #destaque{
+    background:var(--brick); color:var(--cream);
+    position:relative;
+  }
+  #destaque .section-head p{color:rgba(251,245,230,0.82);}
+  #destaque .eyebrow{color:var(--gold);}
+  .feature-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:10px;}
+  @media (max-width:760px){ .feature-grid{grid-template-columns:1fr;} }
+  .feature-card{
+    background:rgba(251,245,230,0.06);
+    border:1px solid rgba(251,245,230,0.18);
+    border-radius:6px; padding:28px;
+  }
+  .feature-card .num{font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:0.85rem; margin-bottom:14px; display:block;}
+  .feature-card h3{font-size:1.2rem; margin-bottom:10px; font-weight:600;}
+  .feature-card p{color:rgba(251,245,230,0.78); font-size:0.95rem;}
+
+  /* ---------- LOCALIZAÇÃO / CONTATO ---------- */
+  #contato{background:var(--paper-dark);}
+  .contato-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
+  @media (max-width:820px){ .contato-grid{grid-template-columns:1fr;} }
+  .info-list{list-style:none; display:flex; flex-direction:column; gap:22px;}
+  .info-list li{display:flex; gap:16px; align-items:flex-start;}
+  .info-icon{
+    width:40px; height:40px; border-radius:50%; background:var(--cream); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem;
+  }
+  .info-label{font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:3px;}
+  .info-value{font-weight:600; font-size:1.02rem;}
+  .info-value a{text-decoration:none; border-bottom:1.5px solid var(--brick);}
+
+  .map-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:6px;
+    height:100%;
+    min-height:280px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;
+    padding:36px; text-align:center;
+    background-image:
+      linear-gradient(rgba(52,36,26,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52,36,26,0.04) 1px, transparent 1px);
+    background-size:26px 26px;
+  }
+  .map-pin{
+    width:46px; height:46px; border-radius:50% 50% 50% 0; background:var(--brick);
+    transform:rotate(-45deg); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(52,36,26,0.25);
+  }
+  .map-pin span{transform:rotate(45deg); color:var(--cream); font-size:1.1rem;}
+  .map-card address{font-style:normal; color:var(--ink-soft); max-width:26ch;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:rgba(251,245,230,0.7); padding:44px 0 30px;}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer .brand{color:var(--cream);}
+  footer .brand-dot{background:var(--gold);}
+  .footer-note{font-family:'JetBrains Mono', monospace; font-size:0.76rem; color:rgba(251,245,230,0.45);}
+  .footer-links{display:flex; gap:20px; list-style:none;}
+  .footer-links a{text-decoration:none; font-size:0.88rem; color:rgba(251,245,230,0.75);}
+  .footer-links a:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#topo"><span class="brand-dot"></span>Sabor da Casa</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#horarios">Horários</a></li>
+      <li><a href="#destaque">Marmitex</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/5566984335436" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+  </div>
+</nav>
+
+<header class="hero" id="topo">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Restaurante · Centro de Aripuanã, MT</span>
+      <h1>Comida de casa,<br> feita com <em>carinho</em>.</h1>
+      <p class="lede">Prato feito e marmitex caprichados no coração de Aripuanã — o tempero de sempre, na mesa ou pra levar.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="tel:+5566984335436">Ligar agora</a>
+        <a class="btn btn-secondary" href="#horarios">Ver horários</a>
+      </div>
+      <div class="status-row">
+        <span class="status-dot open"></span>
+        Aberto todos os dias · só almoço
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stamp">
+        <div class="stamp-inner">
+          <div class="rating">4,5</div>
+          <div class="stars">★★★★★</div>
+          <div class="count">18 avaliações</div>
+        </div>
+      </div>
+      <div class="marmitex">
+        <div class="steam s1"></div>
+        <div class="steam s2"></div>
+        <div class="steam s3"></div>
+        <div class="body"></div>
+        <div class="divider"></div>
+        <div class="divider v2"></div>
+        <div class="lid"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="wrap sobre-grid">
+    <div class="reveal">
+      <span class="eyebrow">Sobre a casa</span>
+      <h2 style="margin-bottom:18px;">Um prato que lembra casa</h2>
+      <p>No Sabor da Casa, a proposta é simples: comida caseira, bem-feita, do jeito que se faz em família — arroz soltinho, feijão de panela e aquele tempero que não se copia.</p>
+      <p>Fica na Av. Dois de Dezembro, bem no Centro de Aripuanã, e atende quem quer sentar à mesa ou levar o marmitex para o trabalho.</p>
+    </div>
+    <div class="sobre-card reveal">
+      <p style="margin-bottom:22px;">Avaliado por quem já provou:</p>
+      <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+        <span style="font-family:'Fraunces',serif; font-size:2.4rem; font-weight:900; color:var(--brick);">4,5</span>
+        <span class="mono" style="color:var(--ink-soft); font-size:0.85rem;">de 5 · 18 avaliações no Google</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Prato feito</span>
+        <span class="tag">Marmitex</span>
+        <span class="tag">R$ 20–40 por pessoa</span>
+        <span class="tag">Retirada &amp; local</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="horarios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Funcionamento</span>
+      <h2>Horários</h2>
+      <p>Aberto de domingo a domingo, só no horário de almoço.</p>
+    </div>
+    <div class="ticket reveal">
+      <div class="ticket-head">
+        <span class="mono">Sabor da Casa · comanda</span>
+        <span class="ticket-status">todos os dias</span>
+      </div>
+      <div class="ticket-body">
+        <div class="shift-row">
+          <span class="shift-name">Almoço</span>
+          <span class="shift-time">11:15 – 13:00</span>
+        </div>
+      </div>
+      <div class="ticket-foot">
+        <span>DOMINGO A DOMINGO</span>
+        <span>R$ 20–40 / pessoa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="destaque">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O carro-chefe</span>
+      <h2>O marmitex de todo dia</h2>
+      <p>Pensado pra quem tem pouco tempo mas não quer abrir mão de comer bem — no balcão ou no WhatsApp.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <span class="num">01</span>
+        <h3>Peça</h3>
+        <p>Chame no WhatsApp ou ligue direto pra combinar o pedido do dia.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="num">02</span>
+        <h3>Retire ou receba</h3>
+        <p>Passe no Centro de Aripuanã entre 11h15 e 13h para retirar o seu.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="num">03</span>
+        <h3>Coma bem</h3>
+        <p>Prato feito completo, do jeito de casa, por R$ 20–40 por pessoa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap contato-grid">
+    <div class="reveal">
+      <span class="eyebrow">Fale com a gente</span>
+      <h2 style="margin-bottom:30px;">Contato &amp; endereço</h2>
+      <ul class="info-list">
+        <li>
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Endereço</div>
+            <div class="info-value">Av. Dois de Dezembro, 437 — Centro, Aripuanã - MT, 78325-000</div>
+          </div>
+        </li>
+        <li>
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Telefone</div>
+            <div class="info-value"><a href="tel:+5566984335436">(66) 98433-5436</a></div>
+          </div>
+        </li>
+        <li>
+          <div class="info-icon">💬</div>
+          <div>
+            <div class="info-label">WhatsApp</div>
+            <div class="info-value"><a href="https://wa.me/5566984335436" target="_blank" rel="noopener">Chamar no WhatsApp</a></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="map-card reveal">
+      <div class="map-pin"><span>🏠</span></div>
+      <div>
+        <div style="font-weight:700; margin-bottom:6px;">Sabor da Casa</div>
+        <address>Av. Dois de Dezembro, 437, Centro, Aripuanã - MT</address>
+      </div>
+      <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Sabor+da+Casa+Aripuan%C3%A3+MT" target="_blank" rel="noopener">Ver rotas no Maps</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <a class="brand" href="#topo"><span class="brand-dot"></span>Sabor da Casa</a>
+    <ul class="footer-links">
+      <li><a href="tel:+5566984335436">Ligar</a></li>
+      <li><a href="https://wa.me/5566984335436" target="_blank" rel="noopener">WhatsApp</a></li>
+      <li><a href="#horarios">Horários</a></li>
+    </ul>
+  </div>
+  <div class="wrap" style="margin-top:22px;">
+    <span class="footer-note">Aripuanã, Mato Grosso — site não oficial, feito a partir de informações públicas do estabelecimento.</span>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
